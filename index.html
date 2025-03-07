@@ -3,57 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name - Personal Page</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    header {
-      background-color: #2c3e50;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #34495e;
-      padding: 10px;
-    }
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    section {
-      padding: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    footer {
-      text-align: center;
-      padding: 10px;
-      background-color: #2c3e50;
-      color: #fff;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    #rubiks-cube-container {
-      width: 100%;
-      height: 400px;
-      margin: 20px auto;
-      text-align: center;
-    }
-  </style>
+  <title>Your Name - Home</title>
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
   <header>
@@ -62,11 +13,11 @@
   </header>
 
   <nav>
-    <a href="#about">About Me</a>
-    <a href="#projects">Projects</a>
-    <a href="#blog">Blog</a>
-    <a href="#resume">Resume</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="blog.html">Blog</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact</a>
   </nav>
 
   <section id="about">
@@ -79,104 +30,13 @@
     <div id="rubiks-cube-container"></div>
   </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><a href="#">Project 1</a> - A brief description of the project.</li>
-      <li><a href="#">Project 2</a> - A brief description of the project.</li>
-      <li><a href="#">Project 3</a> - A brief description of the project.</li>
-    </ul>
-  </section>
-
-  <section id="blog">
-    <h2>Blog</h2>
-    <p>Check out my latest blog posts:</p>
-    <ul>
-      <li><a href="#">Blog Post 1</a></li>
-      <li><a href="#">Blog Post 2</a></li>
-      <li><a href="#">Blog Post 3</a></li>
-    </ul>
-  </section>
-
-  <section id="resume">
-    <h2>Resume</h2>
-    <p>Download my resume: <a href="C:\Users\Abhishek Verma\Downloads\resume_Abhishek_Verma_01.pdf" download>Resume.pdf</a></p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Feel free to reach out to me:</p>
-    <ul>
-      <li>Email: <a href="mailto:abhishek1verma1@gmail.com">your.email@example.com</a></li>
-      <li>GitHub: <a href="https://github.com/AbhishekVerma21">your-username</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/abhishek-verma-615506b6/">Your LinkedIn Profile</a></li>
-    </ul>
-  </section>
-
   <footer>
     <p>&copy; 2023 Your Name. All rights reserved.</p>
   </footer>
 
   <!-- Three.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-    // Set up the scene, camera, and renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, 400);
-    document.getElementById('rubiks-cube-container').appendChild(renderer.domElement);
-
-    // Add lighting
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 5, 5).normalize();
-    scene.add(light);
-
-    // Create the Rubik's Cube
-    const cubeSize = 3;
-    const cube = new THREE.Group();
-
-    const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xffa500, 0xffffff]; // Red, Green, Blue, Yellow, Orange, White
-
-    for (let x = -1; x <= 1; x++) {
-      for (let y = -1; y <= 1; y++) {
-        for (let z = -1; z <= 1; z++) {
-          const geometry = new THREE.BoxGeometry(0.9, 0.9, 0.9);
-          const material = colors.map(color => new THREE.MeshPhongMaterial({ color }));
-          const cubelet = new THREE.Mesh(geometry, material);
-          cubelet.position.set(x, y, z);
-          cube.add(cubelet);
-        }
-      }
-    }
-
-    scene.add(cube);
-
-    // Position the camera
-    camera.position.z = 5;
-
-    // Add interactivity
-    let isDragging = false;
-    let previousMousePosition = { x: 0, y: 0 };
-
-    document.addEventListener('mousedown', () => (isDragging = true));
-    document.addEventListener('mouseup', () => (isDragging = false));
-    document.addEventListener('mousemove', (event) => {
-      if (isDragging) {
-        const deltaX = event.clientX - previousMousePosition.x;
-        const deltaY = event.clientY - previousMousePosition.y;
-        cube.rotation.y += deltaX * 0.01;
-        cube.rotation.x += deltaY * 0.01;
-      }
-      previousMousePosition = { x: event.clientX, y: event.clientY };
-    });
-
-    // Animation loop
-    function animate() {
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-    }
-    animate();
-  </script>
+  <!-- Link to main.js -->
+  <script src="scripts/main.js"></script>
 </body>
 </html>
