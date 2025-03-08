@@ -54,43 +54,6 @@ container.addEventListener('mousemove', (event) => {
   previousMousePosition = { x: event.clientX, y: event.clientY };
 });
 
-// Face Rotation Logic
-function rotateFace(face) {
-  const rotationAxis = { x: 0, y: 0, z: 0 };
-  const angle = Math.PI / 2; // 90 degrees
-
-  switch (face) {
-    case 'front':
-      rotationAxis.z = 1;
-      break;
-    case 'back':
-      rotationAxis.z = -1;
-      break;
-    case 'left':
-      rotationAxis.x = -1;
-      break;
-    case 'right':
-      rotationAxis.x = 1;
-      break;
-    case 'up':
-      rotationAxis.y = 1;
-      break;
-    case 'down':
-      rotationAxis.y = -1;
-      break;
-  }
-
-  // Rotate the cubelets on the selected face
-  cubelets.forEach(cubelet => {
-    if (Math.abs(cubelet.position[face]) === 1) {
-      const quaternion = new THREE.Quaternion();
-      quaternion.setFromAxisAngle(new THREE.Vector3(rotationAxis.x, rotationAxis.y, rotationAxis.z), angle);
-      cubelet.position.applyQuaternion(quaternion);
-      cubelet.quaternion.multiply(quaternion);
-    }
-  });
-}
-
 // Handle window resize
 window.addEventListener('resize', () => {
   const newWidth = container.clientWidth;
