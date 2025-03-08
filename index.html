@@ -30,6 +30,15 @@
   <section id="rubiks-cube">
     <h2>Interactive Cube -- Enjoy</h2>
     <div id="rubiks-cube-container"></div>
+    <!-- Add controls for rotating the cube -->
+    <div class="controls">
+      <button onclick="rotateFace('front')">Rotate Front</button>
+      <button onclick="rotateFace('back')">Rotate Back</button>
+      <button onclick="rotateFace('left')">Rotate Left</button>
+      <button onclick="rotateFace('right')">Rotate Right</button>
+      <button onclick="rotateFace('up')">Rotate Up</button>
+      <button onclick="rotateFace('down')">Rotate Down</button>
+    </div>
   </section>
 
   <footer>
@@ -39,6 +48,6 @@
   <!-- Three.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- Rubik's Cube Script Link to main.js -->
-  <script src="scripts/main.js"> </script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>

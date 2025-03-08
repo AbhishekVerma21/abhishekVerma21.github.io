@@ -1,9 +1,12 @@
 // Scene, Camera, Renderer
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const container = document.getElementById('rubiks-cube-container');
+const width = container.clientWidth;
+const height = container.clientHeight;
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('rubiks-cube-container').appendChild(renderer.domElement);
+renderer.setSize(width, height);
+container.appendChild(renderer.domElement);
 
 // Lighting
 const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -39,9 +42,9 @@ camera.position.z = 5;
 let isDragging = false;
 let previousMousePosition = { x: 0, y: 0 };
 
-document.addEventListener('mousedown', () => (isDragging = true));
-document.addEventListener('mouseup', () => (isDragging = false));
-document.addEventListener('mousemove', (event) => {
+container.addEventListener('mousedown', () => (isDragging = true));
+container.addEventListener('mouseup', () => (isDragging = false));
+container.addEventListener('mousemove', (event) => {
   if (isDragging) {
     const deltaX = event.clientX - previousMousePosition.x;
     const deltaY = event.clientY - previousMousePosition.y;
@@ -87,6 +90,15 @@ function rotateFace(face) {
     }
   });
 }
+
+// Handle window resize
+window.addEventListener('resize', () => {
+  const newWidth = container.clientWidth;
+  const newHeight = container.clientHeight;
+  camera.aspect = newWidth / newHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(newWidth, newHeight);
+});
 
 // Animation Loop
 function animate() {
